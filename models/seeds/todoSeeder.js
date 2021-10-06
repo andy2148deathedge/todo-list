@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const todo = require('../todo');
+const Todo = require('../todo');
 
 mongoose.connect('mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -13,7 +13,7 @@ db.once('open', () => {
   console.log('mongodb connected');
 
   for (let i =0; i < 10; i++) {
-    todo.create({ name: `name-${i}`})  
+    Todo.create({ name: `name-${i}`})  
   }
   
   console.log('done.')
