@@ -1,1 +1,9 @@
 <h2> 這是 TODO 專案的首頁 </h2>
+
+<ul>
+  {{#each todos}}
+  <li>
+    {{ this.name }}
+  </li>
+  {{/each}}
+</ul>
