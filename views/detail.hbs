@@ -1,4 +1,8 @@
-<h2>{{ todo.name }}</h2>
+<h2>
+  <input type="checkbox" name="isDone" {{#if todo.isDone }} checked {{/if}} disabled>
+  {{ todo.name }}
+</h2>
+
 <a href="/todos/{{ todo._id }}/edit"> edit </a>
 <a href="/">back</a>
 <form action="/todos/{{ todo._id }}/delete" method="POST" style="display: inline;">

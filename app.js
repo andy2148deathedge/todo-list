@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   Todo.find()
     .lean()
+    .sort({ _id: 'asc'}) // asc <=> desc 
     .then(todos => res.render('index', { todos }))
     .catch(error => console.error('error'))
 }) 
@@ -54,19 +55,23 @@ app.get('/todos/:id', (req, res) => {
 
 app.get('/todos/:id/edit', (req, res) => {
   const id = req.params.id;
+
   return Todo.findById(id)
     .lean()
-    .then(todo => res.render('edit', { todo })) 
+    .then(todo => {
+      res.render('edit', { todo })
+    }) 
     .catch(error => console.log(error));
 })
 
 app.post('/todos/:id/edit', (req, res) => {
   const id = req.params.id;
-  const name = req.body.name;
+  const { name, isDone } = req.body; // Destructing req object
 
   return Todo.findById(id)
     .then(todo => {
-      todo.name = name;
+      todo.name = name; // 解構出來的變數 name 賦值給資料庫物件
+      todo.isDone = isDone === 'on'; // 原理同上，之前沒有的物件屬性 isDone MongoDB 會生成; 後面是跟 chk box 屬性有關的判斷式
       return todo.save()
     })
     .then(() => res.redirect(`/todos/${id}`))
