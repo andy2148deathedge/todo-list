@@ -9,6 +9,7 @@ require('./config/mongoose');
 
 // 建立 Server 變數 app
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // 各種設置 & middleware
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
@@ -20,6 +21,6 @@ app.use(methodOverride('_method'));
 app.use(routes);
 
 // server listen
-app.listen(3000, () => {
-  console.log('Sever is listening in port 3000.');
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 })
