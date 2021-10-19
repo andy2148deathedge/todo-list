@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 // 各種設置 & middleware
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
-app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
