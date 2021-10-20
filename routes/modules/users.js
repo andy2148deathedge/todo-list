@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+const passport = require('passport');
 const User = require('../../models/user');
 
 router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/login', (req, res) => {
-  // ...
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}));
 
 router.get('/register', (req, res) => {
   res.render('register');
@@ -21,7 +23,6 @@ router.post('/register', (req, res) => {
   User.findOne({ email })
     .then(user => {
       if(user) {
-        console.log('This user has been registered.');
         res.render('register', {name, email, password, confirmPassword}); // 將該(user) 丟回 register 頁
       } else {
         return User.create({

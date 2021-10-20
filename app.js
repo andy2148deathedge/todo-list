@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 // import 自製套件
 const routes = require('./routes');
+const usePassport = require('./config/passport')
 require('./config/mongoose');
 
 // 建立 Server 變數 app
@@ -23,6 +24,8 @@ app.use(session({
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+usePassport(app);
 
 // routing
 app.use(routes);
