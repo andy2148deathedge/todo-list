@@ -15,8 +15,24 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-// router.post('/register', (req, res) => {
-//   const {name, email, password, passwordConfirm} = req.
-// });
+router.post('/register', (req, res) => {
+  const {name, email, password, confirmPassword} = req.body;
+  
+  User.findOne({ email })
+    .then(user => {
+      if(user) {
+        console.log('This user has been registered.');
+        res.render('register', {name, email, password, confirmPassword}); // 將該(user) 丟回 register 頁
+      } else {
+        return User.create({
+          name,
+          email,
+          password
+        })
+          .then(() => res.redirect('/'))
+          .catch(err => console.log(err));
+      }
+    });
+});
 
 module.exports = router;

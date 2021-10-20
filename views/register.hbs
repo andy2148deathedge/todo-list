@@ -2,22 +2,22 @@
   <div class="col-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
-      <form action="/users/login" method="POST">
+      <form action="/users/register" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" name="name" id="name" class="form-control" placeholder="Enter your Name">
+          <input type="text" name="name" value="{{name}}" id="name" class="form-control" placeholder="Enter your Name">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email">
+          <input type="email" name="email" value="{{email}}" id="email" class="form-control" placeholder="Enter Email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
+          <input type="password" name="password" value="{{password}}" id="password" class="form-control" placeholder="Enter Password">
         </div>
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Enter Password again">
+          <input type="password" name="confirmPassword" value="{{confirmPassword}}" id="confirmPassword" class="form-control" placeholder="Enter Password again">
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
       </form>
