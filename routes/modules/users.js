@@ -8,7 +8,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login', passport.authenticate('local', { // 登入功能，使用 passport 的 authenticate()
   successRedirect: '/',
   failureRedirect: '/users/login'
 }));
@@ -34,6 +34,11 @@ router.post('/register', (req, res) => {
           .catch(err => console.log(err));
       }
     });
+});
+
+router.get('/logout', (req, res) => { // 登出
+  req.logout();
+  res.redirect('/users/login');
 });
 
 module.exports = router;
