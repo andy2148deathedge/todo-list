@@ -27,6 +27,14 @@ app.use(methodOverride('_method'));
 
 usePassport(app);
 
+app.use((req, res, next) => {
+  // locals 是一個 node res 的物件, 可以把本來在 req 之下的物件屬性/方法給定位在 res.locals 內
+  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.user = req.user;
+  next();
+});
+
+
 // routing
 app.use(routes);
 
