@@ -5,6 +5,11 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // 若非產品模式，就會使用 .env 裡面的環境設定
+}
+
 // import 自製套件
 const routes = require('./routes');
 const usePassport = require('./config/passport')
@@ -12,14 +17,14 @@ require('./config/mongoose');
 
 // 建立 Server 變數 app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // 各種設置 & middleware
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', 'hbs');  
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
